@@ -23,14 +23,29 @@ connectDB();
 
 const app = express();
 const server = http.createServer(app);
+
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://anon-shield-theta.vercel.app',
+  process.env.CLIENT_URL
+].filter(Boolean);
+
 const io = socketIO(server, {
-  cors: { origin: process.env.CLIENT_URL || 'http://localhost:3000' }
+  cors: {
+    origin: allowedOrigins,
+    credentials: true
+  }
 });
 
 // ===== GLOBAL MIDDLEWARE =====
 app.use(helmet());
 app.use(compression());
-app.use(cors({ origin: process.env.CLIENT_URL || 'http://localhost:3000', credentials: true }));
+app.use(cors({
+  origin: allowedOrigins,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  credentials: true
+}));
+app.options('*', cors());
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('combined', { stream: { write: msg => logger.info(msg.trim()) } }));
@@ -50,20 +65,18 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'operational', version: '1.0.0', timestamp: new Date() });
 });
 
-// ===== SOCKET.IO — Real-time Threat Events =====
+// ===== SOCKET.IO =====
 io.on('connection', (socket) => {
   logger.info(`Socket connected: ${socket.id}`);
-
   socket.on('subscribe:threats', (identityHash) => {
     socket.join(`threats:${identityHash}`);
   });
-
   socket.on('disconnect', () => {
     logger.info(`Socket disconnected: ${socket.id}`);
   });
 });
 
-// ===== ERROR HANDLER (must be last) =====
+// ===== ERROR HANDLER =====
 app.use(errorHandler);
 
 // ===== START SERVER =====
