@@ -1,0 +1,22 @@
+:root {
+  --bg: #050A0E;
+  --bg2: #0A1420;
+  --bg3: #0F1E2E;
+  --accent: #00FFB2;
+  --accent2: #0066FF;
+  --accent3: #FF3366;
+  --text: #E8F4F0;
+  --text2: #7A9BAD;
+  --border: rgba(0,255,178,0.15);
+  --glow: 0 0 20px rgba(0,255,178,0.3);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Syne', 'Segoe UI', sans-serif;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
