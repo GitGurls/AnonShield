@@ -1,0 +1,30 @@
+{
+  "name": "anonshield-node",
+  "version": "1.0.0",
+  "description": "Zero-trust PII encryption middleware using phone-isolated private keys.",
+  "main": "lib/index.js",
+  "files": [
+    "lib",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node test/smoke-test.js",
+    "prototype": "node anonshield-prototype.js"
+  },
+  "keywords": [
+    "cryptography",
+    "zero-trust",
+    "pii-protection",
+    "aes-256-gcm",
+    "rsa-oaep",
+    "ed25519",
+    "privacy",
+    "middleware"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
