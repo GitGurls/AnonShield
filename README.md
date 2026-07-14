@@ -1,8 +1,7 @@
 # 🔐 AnonShield
 ### Anonymous Digital Identity & Data Protection Network
 
-> **Codorra Hackathon 2026** | Cybersecurity Track | MERN Stack  
-> Built in 48 hours — Zero PII stored, Zero Trust Architecture.
+> **Codorra Hackathon 2026** | 
 
 ---
 
